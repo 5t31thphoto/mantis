@@ -197,6 +197,127 @@ h1 {
   filter:drop-shadow(0 1px 3px rgba(0,0,0,.45));
 }
 
+
+/* Mantis Support Station */
+.support {
+  margin: 42px 0 55px;
+  padding: 28px;
+  border: 1px solid #35665c;
+  border-radius: 15px;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(56,185,166,.13), transparent 70%),
+    linear-gradient(145deg,#142725,#0d1718);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.support-kicker {
+  color: var(--lime);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+.support h2 {
+  margin: 7px 0;
+  font-size: clamp(25px,4vw,34px);
+  letter-spacing: -.04em;
+}
+
+.support > p {
+  color: var(--muted);
+  font-size: 13px;
+  max-width: 490px;
+  margin: 0 auto 22px;
+}
+
+.support-buttons {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 12px;
+  max-width: 780px;
+  margin: auto;
+}
+
+.support-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 112px;
+  padding: 15px 10px;
+  border: 1px solid #34534c;
+  border-radius: 11px;
+  background: rgba(56,185,166,.06);
+  transition: transform .2s, border-color .2s,
+              background .2s, box-shadow .2s;
+}
+
+.support-option:hover {
+  transform: translateY(-4px);
+  border-color: var(--teal);
+  background: rgba(56,185,166,.15);
+  box-shadow: 0 0 25px rgba(56,185,166,.16);
+}
+
+.support-option .support-icon {
+  font-size: 25px;
+}
+
+.support-option strong {
+  color: var(--lime);
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.support-option small {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.support-option.featured {
+  border-color: var(--teal);
+  background: rgba(56,185,166,.13);
+  box-shadow: 0 0 20px rgba(56,185,166,.08);
+}
+
+.support-note {
+  margin-top: 17px;
+  font-size: 10px;
+  color: #829b91;
+  letter-spacing: .04em;
+}
+
+.support-footer {
+  margin-top: 12px;
+  text-align: center;
+}
+
+.support-footer a {
+  display: inline-block;
+  color: var(--lime);
+  font-size: 11px;
+  font-weight: 750;
+  padding: 7px 12px;
+  border: 1px solid #34534c;
+  border-radius: 7px;
+  transition: background .2s;
+}
+
+.support-footer a:hover {
+  background: rgba(56,185,166,.12);
+}
+
+@media(max-width:600px) {
+  .support { padding: 23px 14px; }
+  .support-buttons { grid-template-columns: 1fr; }
+  .support-option { min-height: 82px; }
+}
+
+
 /* Section */
 .section-title {
   font-size:26px;
@@ -632,6 +753,51 @@ footer .brand-mini img {
 
 </div>
 
+
+<!-- Mantis Support Station -->
+<section class="support" id="support">
+  <div class="support-kicker">A tiny request from the swarm</div>
+  <h2>Keep the Mantis Growing. 🌱</h2>
+  <p>
+    MantisCore is an independent ecosystem built with curiosity,
+    caffeine and an unreasonable number of lines of code.
+    If you enjoy exploring it, you can help fuel what comes next.
+  </p>
+
+  <div class="support-buttons">
+
+    <a class="support-option"
+       href="https://buy.stripe.com/eVq28q1V371a3d61ai4wM00"
+       target="_blank" rel="noopener">
+      <span class="support-icon">🌱</span>
+      <strong>Feed the Mantis · $5</strong>
+      <small>A little snack goes a long way.</small>
+    </a>
+
+    <a class="support-option featured"
+       href="https://buy.stripe.com/eVq14mbvD71aaFy6uC4wM03"
+       target="_blank" rel="noopener">
+      <span class="support-icon">⚡</span>
+      <strong>Fuel the Swarm · $15</strong>
+      <small>Give the ecosystem a boost!</small>
+    </a>
+
+    <a class="support-option"
+       href="https://buy.stripe.com/7sY14m2Z771a2922em4wM02"
+       target="_blank" rel="noopener">
+      <span class="support-icon">🪲</span>
+      <strong>Choose Your Tribute</strong>
+      <small>Name your own contribution.</small>
+    </a>
+
+  </div>
+
+  <div class="support-note">
+    OPTIONAL SUPPORT · INDEPENDENTLY BUILT · MANTIS APPROVED
+  </div>
+</section>
+
+  
 <div class="sprites-bar">
   <img src="assets/mantis-sprites.webp" alt="Mantis character sprites" width="1920" height="160">
 </div>
@@ -642,6 +808,11 @@ footer .brand-mini img {
   <div class="brand-mini">
     <img src="assets/favicon.png" alt="" width="22" height="22">
     <span>BASALT SOFTWORKS · MANTIS CORE · M5STACK CORE2</span>
+    
+<div class="support-footer">
+  <a href="#support">🌱 Feed the Mantis · Support Development</a>
+</div>
+
   </div>
 </footer>
 
