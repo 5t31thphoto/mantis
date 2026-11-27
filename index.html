@@ -384,6 +384,31 @@ footer .brand-mini img {
   h1 { font-size:36px; }
   .os-text { padding:24px 20px; }
 }
+
+/* Gallery multi-layer parallax scene */
+.app-thumb.parallax-scene {
+  overflow: hidden;
+  background: #1a2840;
+}
+.app-thumb.parallax-scene .plx {
+  position: absolute;
+  inset: -8%;
+  width: 116%;
+  height: 116%;
+  object-fit: cover;
+  object-position: center bottom;
+  image-rendering: pixelated;
+  will-change: transform;
+  pointer-events: none;
+  transition: transform 0.1s ease-out;
+}
+.app-thumb.parallax-scene .plx-bg  { z-index: 0; }
+.app-thumb.parallax-scene .plx-mid { z-index: 1; }
+.app-thumb.parallax-scene .plx-fg  { z-index: 2; object-position: center bottom; }
+.app:hover .app-thumb.parallax-scene .plx {
+  /* keep parallax offsets; mild scale via parent not needed */
+}
+
 </style>
 </head>
 <body>
@@ -521,8 +546,8 @@ footer .brand-mini img {
 
   <!-- MantisCam -->
   <a class="app" href="https://5t31thphoto.github.io/MantisCam/">
-    <div class="app-thumb placeholder">
-      <img src="assets/favicon.png" alt="" width="64" height="64">
+    <div class="app-thumb">
+      <img src="assets/thumb_cam.png" alt="MantisCam" width="640" height="400">
     </div>
     <div class="app-body">
       <div class="app-head"><span class="type">Camera System</span><span class="arrow">↗</span></div>
@@ -532,9 +557,11 @@ footer .brand-mini img {
   </a>
 
   <!-- Mantis Gallery -->
-  <a class="app" href="https://5t31thphoto.github.io/mantisgallery/">
-    <div class="app-thumb placeholder">
-      <img src="assets/favicon.png" alt="" width="64" height="64">
+  <a class="app" href="https://5t31thphoto.github.io/mantisgallery/" id="gallery-app">
+    <div class="app-thumb parallax-scene" aria-hidden="false">
+      <img class="plx plx-bg" src="assets/gallery_bg.png" alt="" width="768" height="462">
+      <img class="plx plx-mid" src="assets/gallery_mid.png" alt="" width="768" height="451">
+      <img class="plx plx-fg" src="assets/gallery_fg.png" alt="" width="768" height="455">
     </div>
     <div class="app-body">
       <div class="app-head"><span class="type">Media</span><span class="arrow">↗</span></div>
@@ -557,8 +584,8 @@ footer .brand-mini img {
 
   <!-- MantisKAI -->
   <a class="app" href="https://5t31thphoto.github.io/mantiskai/">
-    <div class="app-thumb placeholder">
-      <img src="assets/favicon.png" alt="" width="64" height="64">
+    <div class="app-thumb">
+      <img src="assets/thumb_kai.png" alt="MantisKAI" width="640" height="400">
     </div>
     <div class="app-body">
       <div class="app-head"><span class="type">Artificial Intelligence</span><span class="arrow">↗</span></div>
@@ -569,8 +596,8 @@ footer .brand-mini img {
 
   <!-- MantisChat -->
   <a class="app" href="https://5t31thphoto.github.io/mantischat-/">
-    <div class="app-thumb placeholder">
-      <img src="assets/favicon.png" alt="" width="64" height="64">
+    <div class="app-thumb">
+      <img src="assets/thumb_chat.png" alt="MantisChat" width="640" height="400">
     </div>
     <div class="app-body">
       <div class="app-head"><span class="type">Communication</span><span class="arrow">↗</span></div>
@@ -784,6 +811,94 @@ footer .brand-mini img {
   for (let i = 0; i < 40; i++) frame(0.05);
   if ("IntersectionObserver" in window) new IntersectionObserver(es => setRunning(es[0].isIntersecting)).observe(cv);
   else setRunning(true);
+})();
+</script>
+
+
+
+
+
+<script>
+(function () {
+  const scene = document.querySelector(".parallax-scene");
+  if (!scene) return;
+  const bg  = scene.querySelector(".plx-bg");
+  const mid = scene.querySelector(".plx-mid");
+  const fg  = scene.querySelector(".plx-fg");
+  if (!bg || !mid || !fg) return;
+
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce) return;
+
+  // Depth strengths (far moves least, near moves most)
+  const depth = { bg: 0.25, mid: 0.55, fg: 1.0 };
+  const max = 14; // px at full tilt
+  let useGyro = false;
+  let tx = 0, ty = 0; // target -1..1
+  let cx = 0, cy = 0; // current smoothed
+
+  function paint() {
+    cx += (tx - cx) * 0.18;
+    cy += (ty - cy) * 0.18;
+    const x = cx * max, y = cy * max;
+    bg.style.transform  = "translate(" + (x * depth.bg).toFixed(2) + "px," + (y * depth.bg).toFixed(2) + "px)";
+    mid.style.transform = "translate(" + (x * depth.mid).toFixed(2) + "px," + (y * depth.mid).toFixed(2) + "px)";
+    fg.style.transform  = "translate(" + (x * depth.fg).toFixed(2) + "px," + (y * depth.fg).toFixed(2) + "px)";
+    requestAnimationFrame(paint);
+  }
+  requestAnimationFrame(paint);
+
+  function onScroll() {
+    if (useGyro) return;
+    const r = scene.getBoundingClientRect();
+    const midY = r.top + r.height / 2;
+    const vh = window.innerHeight || 1;
+    ty = Math.max(-1, Math.min(1, (midY / vh) * 2 - 1));
+    tx = ty * 0.4;
+  }
+
+  function onOrient(e) {
+    const g = e.gamma || 0;       // left-right
+    const b = (e.beta || 0) - 45; // front-back, centered around upright
+    tx = Math.max(-1, Math.min(1, g / 28));
+    ty = Math.max(-1, Math.min(1, b / 28));
+  }
+
+  function enableGyro() {
+    useGyro = true;
+    window.addEventListener("deviceorientation", onOrient, { passive: true });
+  }
+
+  if (typeof DeviceOrientationEvent !== "undefined" &&
+      typeof DeviceOrientationEvent.requestPermission === "function") {
+    const once = () => {
+      DeviceOrientationEvent.requestPermission()
+        .then(s => { if (s === "granted") enableGyro(); })
+        .catch(() => {});
+      window.removeEventListener("touchend", once);
+      window.removeEventListener("click", once);
+    };
+    window.addEventListener("touchend", once, { passive: true });
+    window.addEventListener("click", once);
+  } else if ("ondeviceorientation" in window) {
+    enableGyro();
+  }
+
+  // Pointer hover parallax on desktop
+  scene.addEventListener("pointermove", (e) => {
+    if (useGyro) return;
+    const r = scene.getBoundingClientRect();
+    tx = ((e.clientX - r.left) / r.width) * 2 - 1;
+    ty = ((e.clientY - r.top) / r.height) * 2 - 1;
+  });
+  scene.addEventListener("pointerleave", () => {
+    if (useGyro) return;
+    tx = 0; ty = 0;
+  });
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
+  onScroll();
 })();
 </script>
 
