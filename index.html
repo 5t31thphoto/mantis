@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1112">
+<title>MantisCore | Basalt Softworks</title>
+<style>
+:root {
+  --bg:#0b1112;
+  --panel:#121d1e;
+  --border:#293c39;
+  --text:#e7efeb;
+  --muted:#9aada6;
+  --teal:#38b9a6;
+  --lime:#b4e879;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+  line-height:1.6;
+}
+a { color:inherit;text-decoration:none; }
+.wrap { width:min(1060px,calc(100% - 40px));margin:auto; }
+header {
+  padding:25px 0;
+  border-bottom:1px solid var(--border);
+}
+.brand { font-weight:850;letter-spacing:.13em; }
+.brand span { color:var(--teal); }
+.brand small {
+  display:block;color:var(--muted);
+  font-size:10px;letter-spacing:.2em;
+}
+main { padding:65px 0 80px; }
+.kicker {
+  color:var(--teal);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+}
+h1 {
+  font-size:clamp(42px,7vw,68px);
+  line-height:1;
+  letter-spacing:-.06em;
+  margin:12px 0;
+}
+.intro p { color:var(--muted);font-size:16px;max-width:650px; }
+.os {
+  margin:38px 0 65px;
+  padding:30px;
+  border:1px solid #35665c;
+  border-radius:12px;
+  background:linear-gradient(120deg,#142725,#111b1c);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:25px;
+}
+.os h2 { margin:5px 0;font-size:30px; }
+.os p { margin:0;color:var(--muted);max-width:650px; }
+.button {
+  background:var(--teal);
+  color:#071312;
+  padding:12px 17px;
+  border-radius:7px;
+  font-size:12px;
+  font-weight:850;
+  white-space:nowrap;
+}
+.button:hover { background:var(--lime); }
+.section-title {
+  font-size:27px;
+  letter-spacing:-.04em;
+  margin:0 0 20px;
+}
+.grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+}
+.app {
+  min-height:145px;
+  padding:19px;
+  display:flex;
+  flex-direction:column;
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:9px;
+  transition:.18s;
+}
+.app:hover {
+  border-color:var(--teal);
+  background:#172425;
+  transform:translateY(-2px);
+}
+.type {
+  font-size:9px;
+  color:var(--teal);
+  font-weight:800;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.app h3 { margin:12px 0 5px;font-size:17px; }
+.app p { margin:0;color:var(--muted);font-size:12px; }
+.arrow { color:var(--lime);margin-left:auto; }
+.app-head { display:flex;align-items:center; }
+footer {
+  border-top:1px solid var(--border);
+  padding:25px 0;
+  color:var(--muted);
+  font-size:11px;
+}
+@media(max-width:760px) {
+  .grid { grid-template-columns:repeat(2,1fr); }
+  .os { flex-direction:column;align-items:flex-start; }
+}
+@media(max-width:520px) {
+  .grid { grid-template-columns:1fr; }
+  main { padding-top:45px; }
+  .wrap { width:calc(100% - 30px); }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <a class="brand" href="#">
+    MANTIS<span>CORE</span>
+    <small>BASALT SOFTWORKS</small>
+  </a>
+</header>
+
+<main>
+<section class="intro">
+  <div class="kicker">The Mantis Ecosystem</div>
+  <h1>One device.<br>Many directions.</h1>
+  <p>
+    MantisCore is the operating system powering a collection
+    of applications, creative tools, simulations and experiences
+    built for the M5Stack Core2.
+  </p>
+</section>
+
+<section class="os">
+  <div>
+    <div class="kicker">The Operating System · M5Stack Core2</div>
+    <h2>MantisCore</h2>
+    <p>
+      The home screen and application launcher for your Mantis
+      device. Launch applications from SD card and preserve
+      application progress and personal settings.
+    </p>
+  </div>
+  <a class="button" href="https://5t31thphoto.github.io/mantis-core/">
+    EXPLORE MANTISCORE ↗
+  </a>
+</section>
+
+<h2 class="section-title">Applications</h2>
+
+<div class="grid">
+
+<a class="app" href="https://5t31thphoto.github.io/spacemantis/">
+  <div class="app-head"><span class="type">Space Exploration</span><span class="arrow">↗</span></div>
+  <h3>SpaceMantis</h3>
+  <p>Explore a vast spacefaring universe with ships, planetary worlds, trading, combat and multiplayer.</p>
+</a>
+
+<a class="app" href="https://5t31thphoto.github.io/mantisplanet-/">
+  <div class="app-head"><span class="type">World Exploration</span><span class="arrow">↗</span></div>
+  <h3>MantisPlanet</h3>
+  <p>Explore procedural landscapes with forests, lakes, weather, wildlife and immersive sound.</p>
+</a>
+
+<a class="app" href="https://5t31thphoto.github.io/mantisrally/">
+  <div class="app-head"><span class="type">Driving Simulation</span><span class="arrow">↗</span></div>
+  <h3>Mantis Rally</h3>
+  <p>Procedural rally stages, branching roads, changing environments and physics-based driving.</p>
+</a>
+
+<a class="app" href="https://5t31thphoto.github.io/seadiver/">
+  <div class="app-head"><span class="type">Underwater Exploration</span><span class="arrow">↗</span></div>
+  <h3>Mantis Seadiver</h3>
+  <p>Explore underwater environments, reefs, kelp forests, wildlife and mysterious ocean depths.</p>
+</a>
+
+<a class="app" href="https://5t31thphoto.github.io/Mantis-air/">
+  <div class="app-head"><span class="type">Flight Simulation</span><span class="arrow">↗</span></div>
+  <h3>Mantis Air</h3>
+  <p>A flight simulator built for the M5Stack Core2.</p>
+</a>
+
+<a class="app" href="https://5t31thphoto.github.io/mantis-synapse/">
+  <div class="app-head"><span class="type">Interactive Visuals</span><span class="arrow">↗</span></div>
+  <h3>Mantis Synapse</h3>
+  <p>Audio-reactive psychedelic visuals and interactive modes controlled by touch, tilt and motion.</p>
+</a>
+
+<a class="app" href="https://5t31thphoto.github.io/MantisCam/">
+  <div class="app-head"><span class="type">Camera System</span><span class="arrow">↗</span></div>
+  <h3>MantisCam</h3>
+  <p>Live camera viewing, streaming and photo, video and audio capture.</p>
+</a>
+
+<a class="app" href="https://5t31thphoto.github.io/mantisgallery/">
+  <div class="app-head"><span class="type">Media</span><span class="arrow">↗</span></div>
+  <h3>Mantis Gallery</h3>
+  <p>SD-card image gallery with albums, shuffle and slideshow functionality.</p>
+</a>
+
+<a class="app" href="https://5t31thphoto.github.io/mantis-studio/">
+  <div class="app-head"><span class="type">Music Production</span><span class="arrow">↗</span></div>
+  <h3>Mantis Studio</h3>
+  <p>A pocket music workstation with drum sequencing, synthesizers, recording and mixing.</p>
+</a>
+
+<a class="app" href="https://5t31thphoto.github.io/mantiskai/">
+  <div class="app-head"><span class="type">Artificial Intelligence</span><span class="arrow">↗</span></div>
+  <h3>MantisKAI</h3>
+  <p>Local LLM frontend and companion Tkinter server.</p>
+</a>
+
+<a class="app" href="https://5t31thphoto.github.io/mantischat-/">
+  <div class="app-head"><span class="type">Communication</span><span class="arrow">↗</span></div>
+  <h3>MantisChat</h3>
+  <p>ESP-NOW group messaging, direct messages and shared whiteboard.</p>
+</a>
+
+<a class="app" href="https://5t31thphoto.github.io/device_radar/">
+  <div class="app-head"><span class="type">Wireless Tools</span><span class="arrow">↗</span></div>
+  <h3>DeviceRadar</h3>
+  <p>Offline Wi-Fi and Bluetooth LE signal discovery and directional radar.</p>
+</a>
+
+<a class="app" href="https://5t31thphoto.github.io/MantisCalc/">
+  <div class="app-head"><span class="type">Engineering Tools</span><span class="arrow">↗</span></div>
+  <h3>MantisCalc</h3>
+  <p>An engineering and trades calculator multitool.</p>
+</a>
+
+</div>
+</main>
+
+<footer>
+  BASALT SOFTWORKS · MANTISCORE · M5STACK CORE2
+</footer>
+
+</div>
+</body>
+</html>
